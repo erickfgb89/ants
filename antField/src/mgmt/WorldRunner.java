@@ -2,6 +2,8 @@ package mgmt;
 
 import java.util.stream.Stream;
 
+import utils.AntUtils;
+
 /**
  * This object will be instantiated in a {@link Thread} that will govern the 
  * scheduling of the simulation.
@@ -21,18 +23,11 @@ public class WorldRunner implements Runnable {
 	 */
 	@Override
 	public void run() {
-		Stream.generate( world::lottery ).forEach( a -> a.getAnt( ).run( ) );
-		/*
-		while( true ) {
-			world.tick( );
-			
-			try {
-				Thread.sleep( 1 );
-			} catch( InterruptedException e ) {
-				e.printStackTrace( );
-			}
-		}
-		*/
+		//Simple random ants are not complex enough to take any significant
+		//amount of time to run at each step, so we'll delay each step a short time
+		//to make the local client display clearer.
+		AntUtils.delayedStream( 20, Stream.generate( world::lottery ) )
+			.forEach( a -> AntFieldMainClass.logMethod.logAction( a.run( ) ) );
 	}
 	
 	/**

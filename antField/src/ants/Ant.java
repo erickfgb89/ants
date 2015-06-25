@@ -1,5 +1,7 @@
 package ants;
 
+import msg.Action;
+
 
 /**
  * An {@code Ant}'s run method represents a single action for an 
@@ -13,12 +15,20 @@ package ants;
  * 
  * @author Erick Aldaz
  */
-public abstract class Ant implements Runnable {
+public abstract class Ant {
 
 	/**
 	 * Parent object that serves as the interface between this Ant and its surrounding {@link mgmt.World}.
 	 */
 	private Atom parent;
+
+	/**
+	 * In lieu of implementing Runnable, this class declares its own version of the {@code run()} 
+	 * method that returns an action to be logged.
+	 * 
+	 * @return Action object representing the Ant's move at the current step
+	 */
+	public abstract Action run( );
 	
 	/**
 	 * Sets the parent of this Ant object to the method's {@link ants.Atom} Argument.

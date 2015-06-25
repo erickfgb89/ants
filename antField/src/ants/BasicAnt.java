@@ -2,6 +2,9 @@ package ants;
 
 import java.util.Random;
 
+import msg.Action;
+import msg.ActionMove;
+
 /**
  * BasicAnt is a proof of concept {@link ants.Ant}.  Its {@code run( )} implementation 
  * simply chooses a random movement vector magnitude and a random delta movement angle 
@@ -24,13 +27,15 @@ public class BasicAnt extends Ant {
 	 * movement vector at every step.
 	 */
 	@Override
-	public void run( ) {
+	public Action run( ) {
 		if( this.getParent( ) == null )
-			return;
+			return null;
 		
 		double forward = r.nextDouble( ) * 5;
 		
 		this.getParent( ).move( forward, r.nextGaussian( ) * Math.PI / 4 );
+		return new ActionMove( this, r.nextGaussian( ) * Math.PI / 4, forward );
+		
 		
 	}
 

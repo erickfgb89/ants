@@ -1,8 +1,9 @@
 package mgmt;
 
-import java.util.LinkedList;
+import java.util.Hashtable;
 import java.util.Random;
 
+import ants.Ant;
 import ants.Atom;
 
 /**
@@ -13,7 +14,7 @@ import ants.Atom;
  * @author Erick Aldaz
  * 
  */
-public class World extends LinkedList<Atom>{
+public class World extends Hashtable<Ant,Atom>{
 	
 	private static final long serialVersionUID = -3325466507174958665L;
 	/**
@@ -32,17 +33,10 @@ public class World extends LinkedList<Atom>{
 	 * 
 	 * @return Random {@link ants.Atom} from this List.
 	 */
-	public Atom lottery( ) {
-		return this.get( r.nextInt( this.size( ) ) );
+	public Ant lottery( ) {
+		return (Ant) this.keySet( ).toArray( )[r.nextInt( this.size( ) )];
 	}
 	
-	/**
-	 * Clock Tick.  Identifies the next ant due to for a turn and 
-	 * calls its {@code run( )} method
-	 */
-	public void tick( ) {
-		lottery( ).getAnt( ).run( );
-	}
 
 	/**
 	 * Takes integer arguments to represent width and height of the board,
@@ -56,7 +50,7 @@ public class World extends LinkedList<Atom>{
 	 * @param h Initial height of the world
 	 */
 	public World( int w, int h ) {
-		super( );
+		super( AntFieldMainClass.initialPopulationSize*2 );
 		r = new Random( );
 		this.worldWidth = w;
 		this.worldHeight = h;

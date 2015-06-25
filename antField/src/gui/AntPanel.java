@@ -2,10 +2,12 @@ package gui;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.util.Map.Entry;
 
 import javax.swing.JPanel;
 
 import mgmt.World;
+import ants.Ant;
 import ants.Atom;
 
 /**
@@ -44,8 +46,8 @@ public class AntPanel extends JPanel {
 		super.paintComponent( g );
 		Graphics2D g2d = (Graphics2D)g;
 		
-		for( Atom a: w ) {
-			g2d.fill( a );
+		for( Entry<Ant, Atom> pair: w.entrySet( ) ) {
+			g2d.fill( pair.getValue( ) );
 		}
 	}
 }
