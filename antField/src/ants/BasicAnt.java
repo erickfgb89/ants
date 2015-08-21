@@ -33,8 +33,9 @@ public class BasicAnt extends Ant {
 		
 		double forward = r.nextDouble( ) * 5;
 		
-		this.getParent( ).move( forward, r.nextGaussian( ) * Math.PI / 4 );
-		return new ActionMove( this, r.nextGaussian( ) * Math.PI / 4, forward );
+		//this.getParent( ).move( forward, r.nextGaussian( ) * Math.PI / 4 );
+		return this.getParent( ).move( 
+				new ActionMove( this, r.nextGaussian( ) * Math.PI / 4, forward ) );
 		
 		
 	}

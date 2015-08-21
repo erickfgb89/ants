@@ -1,6 +1,9 @@
 package ants;
 
+import java.util.Random;
+
 import msg.Action;
+import msg.ActionMove;
 
 
 /**
@@ -41,7 +44,7 @@ public abstract class Ant {
 		return this.parent == null && (this.parent = a) != null;
 	}
 	
-	protected Atom getParent( ) {
+	public Atom getParent( ) {
 		return this.parent;
 	}
 	
@@ -50,13 +53,11 @@ public abstract class Ant {
 	 * This method requests the change from the parent {@code Atom},
 	 * and reports back whether the {@code Atom} accepted the change.
 	 * 
-	 * @param magnitude Magnitude of Atom movement vector.
-	 * @param dd Change to Ant direction.
-	 * @return success or failure of move operation, based on {@code World} rules.
+	 * @param action {@code ActionMove} object representing the move requested
+	 * @return the action resulting from this request, or null if the action was prevented by world rules 
 	 */
-	@SuppressWarnings("unused")
-	private boolean move( double magnitude, double dd ) {
-		return this.parent.move( magnitude, dd );
+	public final Action move( ActionMove action ) {
+		return this.parent.move( action );
 	}
 	
 	/**
@@ -65,7 +66,7 @@ public abstract class Ant {
 	 * has no context in which to communicate, until {@code setParent( )} is called.
 	 */
 	public Ant( ) {
-		this.parent = null;
+		this( null );
 	}
 	
 	/**

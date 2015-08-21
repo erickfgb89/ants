@@ -6,6 +6,8 @@ package ants;
 import java.awt.geom.Rectangle2D.Double;
 
 import mgmt.World;
+import msg.Action;
+import msg.ActionMove;
 
 /**
  * An {@link ants.Atom} is an atomic management unit in the world. Because {@link ants.Ant}s will 
@@ -71,20 +73,20 @@ public class Atom extends Double {
 	 * 
 	 * @param magnitude proposed movement vector magnitude.
 	 * @param dd proposed change in movement vector direction.
-	 * @return success / failure of the Atom's move inside the world.
+	 * @return The final action performed on this {@code Atom}, corrected for any relevant rules in the world
 	 */
-	protected boolean move( double magnitude, double dd ) {
-		if( !( Math.abs( magnitude ) <= 5 && Math.abs( dd ) <= Math.PI ) )
-			return false;
+	protected Action move( ActionMove action ) {
+		if( !( Math.abs( action.magnitude ) <= 5 && Math.abs( action.direction ) <= Math.PI ) )
+			action.magnitude = 1;
 
-		this.direction += dd;
-		this.x = ( this.x + magnitude * Math.cos( this.direction ) ) % this.world.worldWidth;
-		this.y = (this.y + magnitude * Math.sin( this.direction ) ) % this.world.worldHeight;
+		this.direction += action.direction;
+		this.x = ( this.x + action.magnitude * Math.cos( this.direction ) ) % this.world.worldWidth;
+		this.y = (this.y + action.magnitude * Math.sin( this.direction ) ) % this.world.worldHeight;
 		
 		if( this.x < 0 ) this.x += this.world.worldWidth;
 		if( this.y < 0 ) this.y += this.world.worldHeight;
 		
-		return true;
+		return action;
 	}
 	
 	/**

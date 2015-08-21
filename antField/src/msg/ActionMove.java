@@ -15,7 +15,7 @@ import ants.Ant;
 public class ActionMove implements Action {
 
 	private final Ant subject;
-	private final double direction, magnitude;
+	public double direction, magnitude;
 	
 	@Override
 	public void toConsole() {

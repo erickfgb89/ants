@@ -3,8 +3,9 @@
  */
 package ants;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import mgmt.World;
+import msg.ActionMove;
 
 import org.junit.Test;
 
@@ -28,27 +29,27 @@ public class AntMovementTest {
 	public final void test() {
 		//roll to the right side
 		reset( );
-		a.move( 4, Math.PI );
+		a.move( new ActionMove( a.getAnt( ), 4, Math.PI ) );
 		assertEquals( "Atom should have rolled to the right-hand side of the World.\t"
 				+ "x: "+a.x, 8, a.x, 0.1);
 		
 		//roll to the left side
 		reset( );
-		a.move( 4, 0 );
-		a.move( 4, 0 );
+		a.move( new ActionMove( a.getAnt( ), 4, 0 ) );
+		a.move( new ActionMove( a.getAnt( ), 4, 0 ) );
 		assertEquals( "Atom should have rolled to the left-hand side of the World.\t"
 				+ "x: "+a.x, 0, a.x, 0.1);
 		
 		//roll to bottom
 		reset( );
-		a.move( 4, -Math.PI/2 );
+		a.move( new ActionMove( a.getAnt( ), 4, -Math.PI/2 ) );
 		assertEquals( "Atom should have rolled to the bottom edge of the World.\t"
 				+ "y: "+a.y, 8, a.y, 0.1);
 		
 		//roll to top
 		reset( );
-		a.move( 4, Math.PI/2 );
-		a.move( 4, 0 );
+		a.move( new ActionMove( a.getAnt( ), 4, Math.PI/2 ) );
+		a.move( new ActionMove( a.getAnt( ), 4, 0 ) );
 		assertEquals( "Atom should have rolled to the top edge of the World.\t"
 				+ "y: "+a.y, 0, a.y, 0.1);
 		

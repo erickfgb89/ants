@@ -7,7 +7,9 @@ public final class AntUtils {
 	private static <T> T delayReturn( T obj, int delay ) {
 		try {
 			Thread.sleep( 0, delay );
-		} catch (InterruptedException e) {}
+		} catch (InterruptedException e) {
+			System.err.println( "interrupted during sleep. killing thread" );
+		}
 		
 		return obj;
 	}

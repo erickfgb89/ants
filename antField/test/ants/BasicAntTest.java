@@ -7,6 +7,9 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 
+import msg.Action;
+import msg.ActionMove;
+
 import org.junit.Test;
 
 /**
@@ -24,12 +27,13 @@ public class BasicAntTest {
 			private static final long serialVersionUID = 1L;
 
 			@Override
-			public boolean move( double magnitude, double dd ) {
+			public Action move( ActionMove action ) {
 				
 				assertTrue( "magnitude should be <=5 and dd should be <=Math.PI:\t" +
-						"magnitude: "+magnitude+", dd: "+dd, magnitude <= 5 && dd <= Math.PI);
+						"magnitude: "+action.magnitude+", dd: "+action.direction, 
+						action.magnitude <= 5 && action.direction <= Math.PI);
 				
-				return true;
+				return null;
 			}
 		});
 		
